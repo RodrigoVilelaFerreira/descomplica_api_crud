@@ -41,6 +41,15 @@ public class TarefaController {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);		
 	}
 	
+	@GetMapping("/{statusTarefa}")
+	public ResponseEntity<Tarefa> getByStatusTarefa(@PathVariable String statusTarefa) {
+		Tarefa tarefa = tarefaService.getStatusTarefa(statusTarefa);
+		if(tarefa != null)
+			return new ResponseEntity<>(tarefa, HttpStatus.OK); 
+		else 
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);		
+	}
+
 	@PostMapping
 	public ResponseEntity<Tarefa> saveTarefa(@RequestBody Tarefa tarefa) {
 		return new ResponseEntity<>(tarefaService.saveTarefa(tarefa), HttpStatus.CREATED);
